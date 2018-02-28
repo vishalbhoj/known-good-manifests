@@ -25,6 +25,9 @@ rm -f pinned-manifest.xml
 URL=`cat $BUILD_URL_FILE`
 wget $URL/$MANIFEST 2> /dev/null
 
+# Fix remote in manifest
+sed -i "s|\"..\"|\"https://android.googlesource.com/\"|g" $MANIFEST
+
 RAW_DATE=`stat -c "%y" $MANIFEST`
 DATE_HEADER=`date -u --date="$RAW_DATE" +%F_%T`
 
